@@ -1,0 +1,645 @@
+/* ==========================================================
+   VARIÁVEIS E BASE
+   ========================================================== */
+:root {
+  --azul: #5294de;
+  --rosa: #ff5f9e;
+  --amarelo: #ffd35c;
+  --fundo: #f8f8f8;
+
+  --azul-texto: #2a63a8;
+  --azul-topo: #3569b3;
+  --rosa-texto: #c0175a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 60px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--fundo);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================================
+   BOTÕES (usados na Home e em Sessões)
+   ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+
+.btn svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.btn--azul {
+  background: #dde9f8;
+  color: var(--azul-texto);
+}
+
+.btn--azul:hover {
+  box-shadow: 0 10px 22px rgba(82, 148, 222, .3);
+}
+
+.btn--rosa {
+  background: #fad7e6;
+  color: var(--rosa-texto);
+}
+
+.btn--rosa:hover {
+  background: #f9c8dc;
+  box-shadow: 0 10px 22px rgba(255, 95, 158, .3);
+}
+
+/* ==========================================================
+   CABEÇALHO
+   ========================================================== */
+.topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(82, 148, 222, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  z-index: 50;
+  transition: background .4s, backdrop-filter .4s, -webkit-backdrop-filter .4s, border-color .4s, box-shadow .4s;
+}
+
+.topo.rolou {
+  background: rgba(82, 148, 222, .55);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  border-bottom-color: rgba(255, 255, 255, .35);
+  box-shadow: 0 4px 24px rgba(82, 148, 222, .25);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca__logo {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.marca span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.marca strong {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.marca small {
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.menu {
+  display: flex;
+  gap: 36px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.menu a {
+  position: relative;
+  padding: 6px 0;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  border-radius: 3px;
+  background: var(--amarelo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+
+.menu a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Botão hambúrguer (escondido no desktop, aparece no celular) */
+.menu-btn {
+  display: none;
+  background: none;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.menu-btn span {
+  width: 24px;
+  height: 3px;
+  border-radius: 3px;
+  background: white;
+  transition: transform .3s, opacity .3s;
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ==========================================================
+   HOME
+   ========================================================== */
+.hero {
+  min-height: 100vh;
+  padding: 60px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+}
+
+.hero__logo {
+  width: min(48vw, 400px);
+}
+
+.hero__logo img {
+  width: 100%;
+  display: block;
+}
+
+.hero__texto {
+  margin-left: -30px;
+}
+
+.hero__texto h1 {
+  font-size: clamp(20px, 5vw, 60px);
+  font-weight: 700;
+  color: var(--azul);
+  line-height: 1.1;
+}
+
+.hero__texto p {
+  font-size: clamp(24px, 2.7vw, 32px);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--azul);
+  margin: 6px 0 26px;
+}
+
+/* ==========================================================
+   ATENDIMENTOS
+   ========================================================== */
+.atend {
+  min-height: 100vh;
+  background: var(--azul);
+  color: white;
+  padding: 80px 5vw;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 5vw;
+  align-items: center;
+}
+
+.atend h2 {
+  font-size: clamp(26px, 3.6vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 620px;
+}
+
+.atend h2.direita {
+  text-align: right;
+  margin: 44px 0 0 auto;
+  max-width: 560px;
+}
+
+.chips {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 80px;
+}
+
+.chips li {
+  background: #c673b0;
+  color: white;
+  font-weight: 700;
+  font-size: clamp(16px, 1.9vw, 24px);
+  text-align: center;
+  padding: 18px 12px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  transition: transform .3s cubic-bezier(.3, 1.8, .5, 1);
+}
+
+.chips li:hover {
+  transform: translateY(-8px) rotate(-3deg);
+}
+
+.atend__foto {
+  width: 350px;
+  aspect-ratio: 290 / 450;
+  border: 4px solid var(--rosa);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.atend__foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ==========================================================
+   SESSÕES
+   ========================================================== */
+.sessoes {
+  min-height: 100vh;
+  padding: 80px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7vw;
+}
+
+.sessoes__foto {
+  width: min(410px, 70vw);
+  aspect-ratio: 1;
+  border: 7px solid var(--rosa);
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+}
+
+.sessoes__foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sessoes__texto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.sessoes h2 {
+  color: var(--rosa);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* ==========================================================
+   DÚVIDAS (FAQ)
+   ========================================================== */
+.duvidas {
+  min-height: 100vh;
+  background: var(--azul);
+  color: white;
+  padding: 100px 5vw 80px;
+}
+
+.duvidas h2 {
+  text-align: center;
+  font-size: clamp(28px, 3.4vw, 36px);
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.faq {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.faq details {
+  background: #dde6f3;
+  color: var(--azul-texto);
+  border-radius: 24px;
+  transition: transform .4s cubic-bezier(.3, 1.6, .5, 1), box-shadow .4s;
+}
+
+.faq details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+}
+
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 28px 20px 42px;
+  font-size: clamp(16px, 1.9vw, 20px);
+  font-weight: 600;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.seta {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--azul-texto);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: transform .4s cubic-bezier(.3, 1.6, .5, 1), background .3s;
+}
+
+.seta svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--azul-texto);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Abertura suave da resposta */
+.resp {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .4s ease;
+}
+
+.resp>.resposta {
+  overflow: hidden;
+}
+
+details.aberto .resp {
+  grid-template-rows: 1fr;
+}
+
+details.aberto .seta {
+  transform: rotate(180deg);
+  background: white;
+}
+
+/* Texto da resposta */
+.faq .resposta {
+  padding: 0 42px;
+  line-height: 1.6;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.faq .resposta p {
+  margin-bottom: 14px;
+}
+
+.faq .resposta h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 24px 0 10px;
+}
+
+.faq .resposta> :last-child {
+  margin-bottom: 28px;
+}
+
+/* ==========================================================
+   ANIMAÇÕES AO ROLAR
+   ========================================================== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(34px) scale(.97);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .9, .3, 1.2);
+}
+
+.js .reveal.visivel {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal.atraso {
+  transition-delay: .2s;
+}
+
+/* Quem pediu "reduzir movimento" no sistema vê tudo parado */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================
+   CELULAR E TABLET (até 860px)
+   ========================================================== */
+@media (max-width: 860px) {
+
+  /* Cabeçalho */
+  .menu-btn {
+    display: flex;
+  }
+
+  .menu {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0;
+    background: rgba(74, 138, 214, .96);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height .4s, visibility .4s;
+  }
+
+  .menu.aberto {
+    max-height: 300px;
+    visibility: visible;
+  }
+
+  .menu a {
+    padding: 16px 24px;
+  }
+
+  .marca small {
+    font-size: 10.5px;
+  }
+
+  /* Home */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 100px 5vw 50px;
+    gap: 24px;
+  }
+
+  .hero__logo {
+    width: min(62vw, 280px);
+  }
+
+  .hero__texto {
+    margin-left: 0;
+  }
+
+  .hero__texto h1 {
+    font-size: clamp(36px, 10vw, 52px);
+  }
+
+  /* Atendimentos */
+  .atend {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 40px;
+    padding: 90px 6vw 60px;
+    text-align: center;
+  }
+
+  .atend__texto {
+    width: 100%;
+  }
+
+  .atend h2,
+  .atend h2.direita {
+    font-size: clamp(24px, 6.5vw, 30px);
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+
+  .atend h2.direita {
+    margin-top: 48px;
+  }
+
+  .atend h2 br {
+    display: none;
+  }
+
+  .chips {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+    margin: 48px auto 0;
+  }
+
+  .chips li {
+    font-size: 19px;
+  }
+
+  .atend__foto {
+    order: -1;
+    width: min(280px, 100%);
+    margin: 0 auto;
+  }
+
+  /* Sessões */
+  .sessoes {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 6vw;
+    gap: 36px;
+  }
+
+  .sessoes__texto {
+    align-items: center;
+  }
+
+  /* Dúvidas */
+  .duvidas {
+    padding: 90px 4vw 60px;
+  }
+
+  .faq {
+    gap: 18px;
+  }
+
+  .faq summary {
+    padding: 18px 18px 18px 24px;
+  }
+
+  .faq .resposta {
+    padding: 0 24px;
+  }
+}
